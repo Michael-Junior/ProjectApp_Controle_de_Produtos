@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
+import com.tsuryo.swipeablerv.SwipeableRecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
 
     AdapterProduto adapterProduto;
     List<ProdutoModel> produtoModelList = new ArrayList<>();
-    private RecyclerView rvProdutos;
+    private SwipeableRecyclerView rvProdutos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,21 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
         rvProdutos.setHasFixedSize(true);
         adapterProduto = new AdapterProduto(produtoModelList, this);
         rvProdutos.setAdapter(adapterProduto);
+
+        //Deleta os itens arrastando
+        rvProdutos.setListener(new SwipeLeftRightCallback.Listener() {
+            @Override
+            public void onSwipedLeft(int position) {
+                produtoModelList.remove(position);
+                adapterProduto.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onSwipedRight(int position) {
+                produtoModelList.remove(position);
+                adapterProduto.notifyItemRemoved(position);
+            }
+        });
     }
 
     private void carregaLista() {

@@ -8,12 +8,17 @@
     android:background="#f76a65"
     tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.tsuryo.swipeablerv.SwipeableRecyclerView
         android:id="@+id/rv_produtos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/fragment_item_produto"
         tools:itemCount="8"
+        app:leftBgColor="@color/white"
+        app:leftImage="@drawable/ic_delete"
+        app:leftText="Delete"
+        app:rightBgColor="@color/color_edit_list_product"
+        app:rightImage="@drawable/ic_edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
